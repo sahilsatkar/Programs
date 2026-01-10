@@ -1,0 +1,163 @@
+✅ The SIMPLEST Safe Workflow (Solo Dev)
+
+You only need 3 branches:
+
+main       → stable / production
+dev        → tested locally
+feature/*  → work in progress
+
+
+That’s it. Nothing more.
+
+🧱 What Each Branch Means
+🔵 main
+
+Always working
+
+What runs on server
+
+Never commit directly here
+
+🟡 dev
+
+Your daily work branch
+
+You test everything locally here
+
+This is your “safe playground”
+
+🟢 feature/*
+
+One feature or fix at a time
+
+Can break freely
+
+Short-lived
+
+🛠️ One-Time Setup (10 minutes)
+1️⃣ Create dev branch
+git checkout -b dev
+git push -u origin dev
+
+2️⃣ Protect main (Very Important)
+
+On GitHub:
+
+Settings → Branches
+
+Protect main
+
+Require pull request
+
+Disable direct push
+
+This saves you from yourself 😄
+
+🔄 Your New Daily Workflow
+🔹 Step 1: Start Work
+git checkout dev
+git pull
+git checkout -b feature/db-migration
+
+🔹 Step 2: Code Locally
+
+Make changes
+
+Run locally
+
+Fix errors locally
+
+npm run dev
+
+🔹 Step 3: Commit Small
+git add .
+git commit -m "Add initial Postgres setup"
+
+
+Push feature:
+
+git push -u origin feature/db-migration
+
+🔹 Step 4: Merge Feature → Dev
+
+On GitHub:
+
+Open PR: feature/db-migration → dev
+
+Review yourself
+
+Merge
+
+Now dev = working + tested
+
+🔹 Step 5: Deploy Only From Main
+
+When dev is stable:
+
+git checkout main
+git pull
+git merge dev
+git push
+
+
+👉 Server auto-deploys only from main.
+
+🔁 Rollback Becomes EASY
+🔙 Roll back server
+git checkout main
+git reset --hard <LAST_GOOD_COMMIT>
+git push --force
+
+
+Or even easier:
+
+git revert <bad_commit>
+
+🧪 Testing Without Pain
+Local
+
+Always test on feature/* or dev
+
+Never test on server
+
+Server
+
+Server only runs main
+
+No surprises
+
+🔐 Extra Safety (Highly Recommended)
+Tag stable releases
+git tag v1.0.0
+git push origin v1.0.0
+
+
+Now rollback is 1 command.
+
+🚫 What to STOP Doing (Important)
+
+❌ Coding directly on main
+
+❌ Debugging on server
+
+❌ Pushing without testing
+
+❌ Mixing multiple changes in one commit
+
+🧠 Why This Works
+
+You always know what’s deployed
+
+You always have a restore point
+
+You reduce stress
+
+You move faster
+
+This is how professional solo devs work.
+
+✅ Final Simple Rule
+
+Local → feature → dev → main → server
+
+If you follow just this, 90% of your current pain disappears.
